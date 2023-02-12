@@ -1,0 +1,106 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;  /*padding不會改變到div的大小*/
+    font-family: "Quicksand",sans-serif;  /*字體*/
+}
+body
+{   
+    display:flex;
+    justify-content: center;  /*水平置中*/
+    align-items: center;  /*垂直置中*/
+    min-height: 100vh;  /*設置最小高度   vh為整個螢幕的比例100=全部螢幕*/
+    background-color: #23243a;
+}
+.box
+{
+    position: relative;
+    width: 380px;
+    height: 420px;
+    background-image: linear-gradient(to top,#1c686d,#45f3ff);  /*漸層*/
+    border-radius: 8px; /*邊框的角變圓*/
+}
+.form
+{   
+    position: absolute;
+    background-color: #28292d;
+    inset: 3px;  /*從父區塊內縮*/
+    border-radius: 8px;
+    z-index: 10;  /*圖層堆疊順序*/
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;  /*垂直排序*/
+    gap: 25px;  /*行列之間間距*/
+}
+.form h2
+{
+    color: #45f3ff;
+    font-weight: 500;  /*字體粗細*/
+    text-align: left;  /*字體水平置左*/
+    letter-spacing: 0.1em;  /*字體間距*/
+}
+.input_box
+{
+    position: relative;
+    width: 100%;
+    
+}
+.input_box input
+{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background-color: #28292d;
+    border-radius: 5px;
+    outline: none;  /*outline為border外的輪廓*/
+    color:whitesmoke;
+    font-size: 1em;
+    transition: 0.5s;  /*改變元素持續的時間*/
+}
+.input_box span
+{
+    position: absolute;
+    left: 0;
+    padding: 10px;
+    pointer-events: none;  /*不會被上層擋到*/
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.25);;
+    text-transform: uppercase;  /*轉換為大寫*/
+    transition: 0.5s;
+}
+.input_box input:valid ~ span,  /*表輸入框有字時*/
+.input_box input:focus ~ span  /*表輸入框焦點時*/
+{
+    color: #45f3ff;
+    transform: translateX(10px) translateY(-7px);  /*朝x、y軸移動*/
+    font-size: 0.85em;
+    padding: 0 10px;
+    background-color: #28292d;
+    border-right: 1px solid  #45f3ff;
+    border-left: 1px solid  #45f3ff;
+    letter-spacing: 0.1em;
+}
+.input_box input:valid,
+.input_box input:focus
+{
+    border:1px solid #45f3ff;
+}
+input[type="submit"]
+{
+    border: none;
+    outline: none;
+    width: 100px;
+    background-color: #45f3ff;
+    padding: 11px 25px;
+    border-radius: 5px;
+    font-size:600;
+    cursor: pointer;  /*焦點時鼠標顯示可選擇*/
+}
+.button_container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}

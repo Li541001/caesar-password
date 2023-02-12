@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">  <!--是否翻譯-->
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet"> <!--這三行為引入字體-->
+
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="stylesheet" href="style_caesar.css" /><!--引入css檔案-->
+    <title>caesar</title>
+</head>
+
+<body>
+    <div class="box">
+        <div class="form">
+            <h2>Caesar Password</h2>
+            <div class="input_box">
+                <input type="text" required="required" id="value_in">  <!--有required才可使用焦點或是當裡面有值時-->
+                <span>input value</span>
+            </div>
+            <div class="input_box">
+                <input type="text" required="required" id="key_in" >
+                <span>Key</span>
+            </div>
+            <div class="input_box">
+                <input type="text" required="required" id="ans_out" readonly="readonly">
+                <span id="text">Secret text</span>
+            </div>
+            <div class="button_container">
+                <input type="submit" value="encrypt" onclick="handleEncrypt()">  <!--value為要顯示的字-->
+                <input type="submit" value="decrypt" onclick="handleDecrypt()">
+            </div>
+        </div>
+    </div>
+    <script>
+        let Value = document.getElementById("value_in"); 
+        let Key = document.getElementById("key_in");    
+        let Ans = document.getElementById("ans_out");   
+        let text = document.getElementById("text");     
+
+        let arrayText = [];
+        let SecretText;
+        let asciiText;
+        let Temp;
+        let listTemp;
+        let upper_lower;
+        let value_key;
+
+        const handleEncrypt =()=>{
+            value_key = Key.value;
+            if(value_key<=0){
+                caesar2()
+            }
+            else{
+                caesar1()
+            }
+        }
+
+        const handleDecrypt =()=>{
+            value_key = Key.value;
+            if(value_key<=0){
+                caesar1()
+            }
+            else{
+                caesar2()
+            }
+        
+        }
+
+        function caesar1() {
+            arrayText = Value.value;
+            
+            value_key%=26;           //key超出26取餘數
+            SecretText = "";
+            for (let i = 0; i < arrayText.length; i++) {
+                asciiText = arrayText[i].charCodeAt(0);     //取得文字的ascii碼
+                
+                if(asciiText == 32){SecretText += " "; continue;}   //空白鍵     
+                else if (asciiText > 90) {upper_lower = 1;}     //小寫  
+                else if (asciiText <= 90) {upper_lower = 2;}    //大寫
+                    
+                Temp = Number(asciiText) + Number(value_key);   //移動後
+
+                if (Temp > 122 && upper_lower == 1) {Temp -= 26;}  //小寫超出z   
+                else if (Temp < 97 && upper_lower == 1) {Temp += 26;}
+                else if (Temp > 90 && upper_lower == 2) {Temp -= 26;} //大寫超出Z
+                else if (Temp < 41 && upper_lower == 2) {Temp += 26;}
+                    
+                listTemp = String.fromCodePoint(Temp);    //ascii碼轉字串
+                SecretText += listTemp;
+            }
+            text.style.display = "none";
+            Ans.value = SecretText;
+        }
+        function caesar2() {
+            arrayText = Value.value;
+            
+            value_key%=26;           //key超出26取餘數
+            SecretText = "";
+            for (let i = 0; i < arrayText.length; i++) {
+                asciiText = arrayText[i].charCodeAt(0);     //取得文字的ascii碼
+                
+                if(asciiText == 32){SecretText += " "; continue;}   //空白鍵     
+                else if (asciiText > 90) {upper_lower = 1;}     //小寫  
+                else if (asciiText <= 90) {upper_lower = 2;}    //大寫
+                    
+                Temp = Number(asciiText) - Number(value_key);   //移動後
+
+                if (Temp > 122 && upper_lower == 1) {Temp -= 26;}  //小寫超出z   
+                else if (Temp < 97 && upper_lower == 1) {Temp += 26;}
+                else if (Temp > 90 && upper_lower == 2) {Temp -= 26;} //大寫超出Z
+                else if (Temp < 41 && upper_lower == 2) {Temp += 26;}
+                    
+                listTemp = String.fromCodePoint(Temp);    //ascii碼轉字串
+                SecretText += listTemp;
+            }
+            text.style.display = "none";
+            Ans.value = SecretText;
+        }
+    </script>
+</body>
+</html>
