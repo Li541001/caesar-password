@@ -75,9 +75,10 @@
             for (let i = 0; i < arrayText.length; i++) {
                 asciiText = arrayText[i].charCodeAt(0);     //取得文字的ascii碼
                 
-                if(asciiText == 32){SecretText += " "; continue;}   //空白鍵     
-                else if (asciiText > 90) {upper_lower = 1;}     //小寫  
-                else if (asciiText <= 90) {upper_lower = 2;}    //大寫
+                
+                if (asciiText >= 97 && asciiText <= 122) {upper_lower = 1;}     //小寫  
+                else if (asciiText <= 90 && asciiText >= 65) {upper_lower = 2;}    //大寫
+                else{SecretText+=arrayText[i]; continue;}
                     
                 Temp = Number(asciiText) + Number(value_key);   //移動後
 
@@ -100,9 +101,9 @@
             for (let i = 0; i < arrayText.length; i++) {
                 asciiText = arrayText[i].charCodeAt(0);     //取得文字的ascii碼
                 
-                if(asciiText == 32){SecretText += " "; continue;}   //空白鍵     
-                else if (asciiText > 90) {upper_lower = 1;}     //小寫  
-                else if (asciiText <= 90) {upper_lower = 2;}    //大寫
+                if (asciiText >= 97 && asciiText <= 122) {upper_lower = 1;}     //小寫  
+                else if (asciiText <= 90 && asciiText >= 65) {upper_lower = 2;}    //大寫
+                else{SecretText+=arrayText[i]; continue;}
                     
                 Temp = Number(asciiText) - Number(value_key);   //移動後
 
